@@ -1,63 +1,43 @@
 package engineer.leepsky.universitymodel.model;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Objects;
 
+@Entity
+@Table(name = "groups")
 public class Group {
 
-    private String id;
-    private Teacher curator;
-    private List<Student> students;
-    private Schedule schedule;
+    @Id
+    @Column(name = "id")
+    private int id;
 
-    public Group(String id, Teacher curator, List<Student> students, Schedule schedule) {
-        this.id = id;
-        this.curator = curator;
-        this.students = students;
-        this.schedule = schedule;
-    }
+    @Column(name = "curator_id")
+    private int curatorId;
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public List<Student> getStudents() {
-        return students;
+    public int getCuratorId() {
+        return curatorId;
     }
 
-    public void setStudents(List<Student> students) {
-        this.students = students;
-    }
-
-    public Schedule getSchedule() {
-        return schedule;
-    }
-
-    public void setSchedule(Schedule schedule) {
-        this.schedule = schedule;
-    }
-
-    public Teacher getCurator() {
-        return curator;
-    }
-
-    public void setCurator(Teacher curator) {
-        this.curator = curator;
+    public void setCuratorId(int curatorId) {
+        this.curatorId = curatorId;
     }
 
     @Override
     public String toString() {
         return "Group{" +
-                "id='" + id + '\'' +
-                ", curator=" + curator +
-                ", students=" + students +
-                ", schedule=" + schedule +
+                "id=" + id +
+                ", curatorId=" + curatorId +
                 '}';
     }
 
@@ -66,11 +46,11 @@ public class Group {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Group group = (Group) o;
-        return Objects.equals(id, group.id);
+        return id == group.id && curatorId == group.curatorId;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(id, curatorId);
     }
 }

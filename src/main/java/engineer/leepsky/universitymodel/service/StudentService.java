@@ -1,7 +1,9 @@
 package engineer.leepsky.universitymodel.service;
 
+import engineer.leepsky.universitymodel.model.Lesson;
 import engineer.leepsky.universitymodel.model.Student;
 
+import java.sql.Date;
 import java.util.List;
 
 public interface StudentService {
@@ -39,5 +41,15 @@ public interface StudentService {
      * @return - true if student was deleted, false otherwise
      */
     boolean delete(Integer id);
+
+    /**
+     * Returns a list of lessons on the given date
+     * @param id - ID of a student
+     * @param date - date
+     * @return - list of lessons on the given date
+     */
+    List<Lesson> getStudentLessons(Integer id);
+
+    List<Lesson> getStudentLessonsOnDate(Integer id, Date date);
 
 }

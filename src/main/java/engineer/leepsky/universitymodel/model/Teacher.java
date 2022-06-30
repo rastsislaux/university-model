@@ -1,27 +1,44 @@
 package engineer.leepsky.universitymodel.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Objects;
 
+@Entity
+@Table(name = "teachers")
 public class Teacher {
 
-    public String fullName;
+    @Id
+    @Column(name = "id")
+    private int id;
 
-    public Teacher(String fullName) {
-        this.fullName = fullName;
+    @Column(name = "name")
+    private String name;
+
+
+    public int getId() {
+        return id;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getFullName() {
-        return fullName;
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
     public String toString() {
         return "Teacher{" +
-                "fullName='" + fullName + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 '}';
     }
 
@@ -30,12 +47,11 @@ public class Teacher {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Teacher teacher = (Teacher) o;
-        return Objects.equals(fullName, teacher.fullName);
+        return id == teacher.id && Objects.equals(name, teacher.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(fullName);
+        return Objects.hash(id, name);
     }
-
 }

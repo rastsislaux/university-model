@@ -1,6 +1,7 @@
 package engineer.leepsky.universitymodel.model;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.util.Objects;
 
 @Entity
@@ -24,7 +25,7 @@ public class Lesson {
     private int groupId;
 
     @Column(name = "date")
-    private String date;
+    private Date date;
 
 
     public int getId() {
@@ -67,11 +68,11 @@ public class Lesson {
         this.groupId = groupId;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
