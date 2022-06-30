@@ -19,11 +19,16 @@ public class StudentController {
         this.studentService = studentService;
     }
 
+    @GetMapping(value = "/students/{id}/schedule")
+    public ResponseEntity<?> getScheduleForStudent(@PathVariable int id) {
+        return new ResponseEntity<>(id, HttpStatus.NOT_IMPLEMENTED);
+    }
+
     @PostMapping(value = "/students")
     public ResponseEntity<?> create(@RequestBody Student student) {
         return studentService.create(student)
-                ? new ResponseEntity<>(HttpStatus.CREATED)
-                : new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
+            ? new ResponseEntity<>(HttpStatus.CREATED)
+            : new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
     }
 
     @GetMapping(value = "/students")
@@ -35,7 +40,7 @@ public class StudentController {
     }
 
     @GetMapping(value = "/students/{id}")
-    public ResponseEntity<Student> read(@PathVariable(name = "id") String id) {
+    public ResponseEntity<Student> read(@PathVariable(name = "id") Integer id) {
         final Student student = studentService.read(id);
 
         return student != null
@@ -44,7 +49,7 @@ public class StudentController {
     }
 
     @PutMapping(value = "/students/{id}")
-    public ResponseEntity<?> update(@PathVariable(name = "id") String id, @RequestBody Student student) {
+    public ResponseEntity<?> update(@PathVariable(name = "id") Integer id, @RequestBody Student student) {
         final boolean updated = studentService.update(id, student);
 
         return updated
@@ -53,7 +58,7 @@ public class StudentController {
     }
 
     @DeleteMapping(value = "/students/{id}")
-    public ResponseEntity<?> delete(@PathVariable(name = "id") String id) {
+    public ResponseEntity<?> delete(@PathVariable(name = "id") Integer id) {
         final boolean deleted = studentService.delete(id);
 
         return deleted

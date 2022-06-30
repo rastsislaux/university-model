@@ -1,35 +1,31 @@
 package engineer.leepsky.universitymodel.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Objects;
 
+@Entity
+@Table(name = "students")
 public class Student {
 
-    private String id;
+    @Id
+    @Column(name = "id")
+    private int id;
 
+    @Column(name = "name")
     private String name;
 
-    private String groupId;
+    @Column(name = "group_id")
+    private int groupId;
 
-    public Student(String id, String groupId, String name) {
-        this.id = id;
-        this.groupId = groupId;
-        this.name = name;
-    }
-
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
-    }
-
-    public String getGroupId() {
-        return groupId;
-    }
-
-    public void setGroupId(String groupId) {
-        this.groupId = groupId;
     }
 
     public String getName() {
@@ -40,25 +36,33 @@ public class Student {
         this.name = name;
     }
 
+    public int getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(int groupId) {
+        this.groupId = groupId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Student student = (Student) o;
-        return Objects.equals(id, student.id);
+        return id == student.id && groupId == student.groupId && Objects.equals(name, student.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(id, name, groupId);
     }
 
     @Override
     public String toString() {
         return "Student{" +
-                "id='" + id + '\'' +
+                "id=" + id +
                 ", name='" + name + '\'' +
-                ", groupId='" + groupId + '\'' +
+                ", groupId=" + groupId +
                 '}';
     }
 }

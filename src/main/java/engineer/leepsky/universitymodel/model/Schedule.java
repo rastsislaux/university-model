@@ -1,7 +1,9 @@
 package engineer.leepsky.universitymodel.model;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class Schedule {
 
@@ -75,8 +77,60 @@ public class Schedule {
         }
     }
 
-    Map<Date, List<Lesson>> schedule;
-    
-    
+    Map<Date, List<Lesson>> lessons;
 
+    public Map<Date, List<Lesson>> getLessons() {
+        return lessons;
+    }
+
+    public List<Lesson> getLessonsByDate(Date date) {
+        if (lessons.containsKey(date)) {
+            return lessons.get(date);
+        }
+        return Collections.emptyList();
+    }
+
+    public void setLessonsOnDate(Date date, List<Lesson> newLessons) {
+        lessons.put(date, newLessons);
+    }
+
+    public void addLessonOnDate(Date date, Lesson lesson) {
+        if (lessons.containsKey(date)) {
+            lessons.get(date).add(lesson);
+            return;
+        }
+
+        lessons.put(date, List.of(lesson));
+    }
+
+    public boolean removeLessonOnDate(Date date, int index) {
+        if (lessons.containsKey(date)) {
+            return lessons.get(date).remove(index) != null;
+        }
+        return false;
+    }
+
+    public void removeAllLessonsOnDate(Date date) {
+        lessons.remove(date);
+    }
+
+    @Override
+    public String toString() {
+        return "Schedule{" +
+                lessons +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Schedule schedule = (Schedule) o;
+        return Objects.equals(lessons, schedule.lessons);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lessons);
+    }
 }

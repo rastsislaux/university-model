@@ -23,7 +23,7 @@ public interface StudentService {
      * @param id - student ID
      * @return - student object with given ID
      */
-    Student read(String id);
+    Student read(Integer id);
 
     /**
      * Update student with given ID
@@ -31,13 +31,13 @@ public interface StudentService {
      * @param student - Student to replace an existing object
      * @return - true if student was updated, false otherwise
      */
-    boolean update(String id, Student student);
+    boolean update(Integer id, Student student);
 
     /**
      * Deletes a student with given ID
      * @param id - ID of a student that must be deleted
      * @return - true if student was deleted, false otherwise
      */
-    boolean delete(String id);
+    boolean delete(Integer id);
 
 }
