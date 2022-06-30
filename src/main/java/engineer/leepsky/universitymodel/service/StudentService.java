@@ -11,6 +11,7 @@ public interface StudentService {
     /**
      * Creates a new student
      * @param student - student to be created
+     * @return - true if student was created, false otherwise
      */
     boolean create(Student student);
 
@@ -43,13 +44,18 @@ public interface StudentService {
     boolean delete(Integer id);
 
     /**
-     * Returns a list of lessons on the given date
+     * Returns a list of lessons
+     * @param id - ID of a student
+     * @return - list of lessons on the given date
+     */
+    List<Lesson> readLessons(Integer id);
+
+    /**
+     * Returns a list of lessons on a given date
      * @param id - ID of a student
      * @param date - date
      * @return - list of lessons on the given date
      */
-    List<Lesson> getStudentLessons(Integer id);
-
-    List<Lesson> getStudentLessonsOnDate(Integer id, Date date);
+    List<Lesson> readLessonsOnDate(Integer id, Date date);
 
 }
