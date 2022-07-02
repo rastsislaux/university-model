@@ -1,26 +1,26 @@
 version: '2'
 
 services:
-  app:
+  application:
     image: 'docker-spring-boot-postgres:latest'
     build:
       context: .
-    container_name: app
+    container_name: application
     ports:
       - "8080:8080"
     depends_on:
-      - db
+      - database
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/university
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://database:5432/university
       - SPRING_DATASOURCE_USERNAME=university
       - SPRING_DATASOURCE_PASSWORD=university
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
 
-  db:
+  database:
     image: 'postgres:13.1-alpine'
     volumes:
       - ./database/dump.sql:/docker-entrypoint-initdb.d/init.sql
-    container_name: db
+    container_name: database
     environment:
       - POSTGRES_USER=university
       - POSTGRES_PASSWORD=university
