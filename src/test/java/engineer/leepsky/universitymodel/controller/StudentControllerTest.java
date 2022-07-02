@@ -1,9 +1,9 @@
 package engineer.leepsky.universitymodel.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import engineer.leepsky.universitymodel.model.Group;
+import engineer.leepsky.universitymodel.model.Student;
 import engineer.leepsky.universitymodel.model.Lesson;
-import engineer.leepsky.universitymodel.service.GroupService;
+import engineer.leepsky.universitymodel.service.StudentService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,15 +22,15 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(GroupController.class)
-@DisplayName("Group Controller")
-class GroupControllerTest {
+@WebMvcTest(StudentController.class)
+@DisplayName("Student Controller")
+class StudentControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @MockBean
-    private GroupService groupService;
+    private StudentService studentService;
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -46,9 +46,9 @@ class GroupControllerTest {
                 new Lesson(3, 3, 3, "test room3", 1919,
                         Date.valueOf("2022-09-09")));
 
-        when (groupService.getLessons(any())).thenReturn(lessons);
+        when (studentService.readLessons(any())).thenReturn(lessons);
 
-        mockMvc.perform(get("/groups/1919/schedule"))
+        mockMvc.perform(get("/students/1919/schedule"))
                 .andExpect(status().isOk())
                 .andExpect(content().json(objectMapper.writeValueAsString(lessons)));
     }
@@ -64,124 +64,124 @@ class GroupControllerTest {
                 new Lesson(3, 3, 3, "test room3", 1919,
                         Date.valueOf("2022-09-09")));
 
-        when (groupService.getLessonsOnDate(any(), any())).thenReturn(lessons);
+        when (studentService.readLessonsOnDate(any(), any())).thenReturn(lessons);
 
-        mockMvc.perform(get("/groups/1919/schedule/2022-09-09"))
+        mockMvc.perform(get("/students/1919/schedule/2022-09-09"))
                 .andExpect(status().isOk())
                 .andExpect(content().json(objectMapper.writeValueAsString(lessons)));
     }
 
     @Test
-    @DisplayName("Create a group with a new ID")
+    @DisplayName("Create a student with a new ID")
     void testCreate() throws Exception {
-        when(groupService.create(any())).thenReturn(true);
+        when(studentService.create(any())).thenReturn(true);
 
         mockMvc.perform(
-                    post("/groups")
-                            .content(objectMapper.writeValueAsString(new Group(1, 1)))
+                    post("/students")
+                            .content(objectMapper.writeValueAsString(new Student()))
                             .contentType(MediaType.APPLICATION_JSON)
                 )
                 .andExpect(status().isCreated());
     }
 
     @Test
-    @DisplayName("Create a group with taken ID")
+    @DisplayName("Create a student with taken ID")
     void testCreateFail() throws Exception {
-        when(groupService.create(any())).thenReturn(false);
+        when(studentService.create(any())).thenReturn(false);
 
         mockMvc.perform(
-                    post("/groups")
-                            .content(objectMapper.writeValueAsString(new Group(1, 1)))
+                    post("/students")
+                            .content(objectMapper.writeValueAsString(new Student()))
                             .contentType(MediaType.APPLICATION_JSON)
                 )
                 .andExpect(status().isNotModified());
     }
 
     @Test
-    @DisplayName("Read all groups")
+    @DisplayName("Read all students")
     void testReadAll() throws Exception {
-        List<Group> groups = List.of(new Group(1, 1));
+        List<Student> students = List.of(new Student());
 
-        when(groupService.readAll()).thenReturn(groups);
+        when(studentService.readAll()).thenReturn(students);
 
-        mockMvc.perform(get("/groups"))
+        mockMvc.perform(get("/students"))
                 .andExpect(status().isOk())
-                .andExpect(content().json(objectMapper.writeValueAsString(groups)));
+                .andExpect(content().json(objectMapper.writeValueAsString(students)));
     }
 
     @Test
-    @DisplayName("Read all groups when no is present")
+    @DisplayName("Read all students when no is present")
     void testReadAllFail() throws Exception {
-        List<Group> groups = Collections.emptyList();
+        List<Student> students = Collections.emptyList();
 
-        when(groupService.readAll()).thenReturn(groups);
+        when(studentService.readAll()).thenReturn(students);
 
-        mockMvc.perform(get("/groups"))
+        mockMvc.perform(get("/students"))
                 .andExpect(status().isNotFound());
     }
 
     @Test
-    @DisplayName("Read one group")
+    @DisplayName("Read one student")
     void testRead() throws Exception {
-        Group group = new Group(1, 1);
+        Student student = new Student();
 
-        when(groupService.read(any())).thenReturn(group);
+        when(studentService.read(any())).thenReturn(student);
 
-        mockMvc.perform(get("/groups/1"))
+        mockMvc.perform(get("/students/1"))
                 .andExpect(status().isOk())
-                .andExpect(content().json(objectMapper.writeValueAsString(group)));
+                .andExpect(content().json(objectMapper.writeValueAsString(student)));
     }
 
     @Test
-    @DisplayName("Read non-existent group")
+    @DisplayName("Read non-existent student")
     void testReadFail() throws Exception {
-        when(groupService.read(any())).thenReturn(null);
+        when(studentService.read(any())).thenReturn(null);
 
-        mockMvc.perform(get("/groups/1"))
+        mockMvc.perform(get("/students/1"))
                 .andExpect(status().isNotFound());
     }
 
     @Test
-    @DisplayName("Update group")
+    @DisplayName("Update student")
     void testUpdate() throws Exception {
-        when(groupService.update(any(), any())).thenReturn(true);
+        when(studentService.update(any(), any())).thenReturn(true);
 
         mockMvc.perform(
-                put("/groups/1")
-                        .content(objectMapper.writeValueAsString(new Group(1, 1)))
+                put("/students/1")
+                        .content(objectMapper.writeValueAsString(new Student()))
                         .contentType(MediaType.APPLICATION_JSON)
                 )
                 .andExpect(status().isOk());
     }
 
     @Test
-    @DisplayName("Update non-existent group")
+    @DisplayName("Update non-existent student")
     void testUpdateFail() throws Exception {
-        when(groupService.update(any(), any())).thenReturn(false);
+        when(studentService.update(any(), any())).thenReturn(false);
 
         mockMvc.perform(
-                put("/groups/1")
-                        .content(objectMapper.writeValueAsString(new Group(1, 1)))
+                put("/students/1")
+                        .content(objectMapper.writeValueAsString(new Student()))
                         .contentType(MediaType.APPLICATION_JSON)
                 )
                 .andExpect(status().isNotModified());
     }
 
     @Test
-    @DisplayName("Delete group")
+    @DisplayName("Delete student")
     void testDelete() throws Exception {
-        when(groupService.delete(any())).thenReturn(true);
+        when(studentService.delete(any())).thenReturn(true);
 
-        mockMvc.perform(delete("/groups/1"))
+        mockMvc.perform(delete("/students/1"))
                 .andExpect(status().isOk());
     }
 
     @Test
-    @DisplayName("Delete non-existent group")
+    @DisplayName("Delete non-existent student")
     void testDeleteFail() throws Exception {
-        when(groupService.delete(any())).thenReturn(false);
+        when(studentService.delete(any())).thenReturn(false);
 
-        mockMvc.perform(delete("/groups/1"))
+        mockMvc.perform(delete("/students/1"))
                 .andExpect(status().isNotModified());
     }
 
