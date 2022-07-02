@@ -27,6 +27,16 @@ public class Lesson {
     @Column(name = "date")
     private Date date;
 
+    public Lesson() { }
+
+    public Lesson(int id, int subjectId, int teacherId, String roomId, int groupId, Date date) {
+        this.id = id;
+        this.subjectId = subjectId;
+        this.teacherId = teacherId;
+        this.roomId = roomId;
+        this.groupId = groupId;
+        this.date = date;
+    }
 
     public int getId() {
         return id;

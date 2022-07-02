@@ -17,6 +17,13 @@ public class Subject {
     @Column(name = "name")
     private String name;
 
+    public Subject() { }
+
+    public Subject(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public int getId() {
         return id;
     }

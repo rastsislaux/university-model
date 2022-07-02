@@ -17,6 +17,13 @@ public class Group {
     @Column(name = "curator_id")
     private int curatorId;
 
+    public Group() { }
+
+    public Group(int id, int curatorId) {
+        this.id = id;
+        this.curatorId = curatorId;
+    }
+
     public int getId() {
         return id;
     }

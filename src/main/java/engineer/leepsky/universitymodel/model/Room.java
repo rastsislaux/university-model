@@ -18,6 +18,12 @@ public class Room {
     @Column(name = "responsible_person_id")
     private int responsiblePerson;
 
+    public Room() { }
+
+    public Room(String number, int responsiblePerson) {
+        this.number = number;
+        this.responsiblePerson = responsiblePerson;
+    }
 
     public String getNumber() {
         return number;

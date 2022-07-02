@@ -20,6 +20,15 @@ public class Student {
     @Column(name = "group_id")
     private int groupId;
 
+    public Student() { }
+
+    public Student(int id, String name, int groupId) {
+        this.id = id;
+        this.name = name;
+        this.groupId = groupId;
+    }
+
+
     public int getId() {
         return id;
     }
