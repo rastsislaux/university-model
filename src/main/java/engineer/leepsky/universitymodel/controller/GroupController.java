@@ -23,13 +23,13 @@ public class GroupController {
 
     @GetMapping(value = "/groups/{id}/schedule")
     public ResponseEntity<?> readLessons(@PathVariable int id) {
-        List<Lesson> lessons = groupService.getLessons(id);
+        List<Lesson> lessons = groupService.readLessons(id);
         return new ResponseEntity<>(lessons, HttpStatus.OK);
     }
 
     @GetMapping(value = "/groups/{id}/schedule/{date}")
     public ResponseEntity<?> readLessonsOnDate(@PathVariable int id, @PathVariable Date date) {
-        List<Lesson> lessons = groupService.getLessonsOnDate(id, date);
+        List<Lesson> lessons = groupService.readLessonsOnDate(id, date);
         return new ResponseEntity<>(lessons, HttpStatus.OK);
     }
 

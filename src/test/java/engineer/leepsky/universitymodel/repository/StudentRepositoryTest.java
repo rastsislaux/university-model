@@ -2,7 +2,6 @@ package engineer.leepsky.universitymodel.repository;
 
 import engineer.leepsky.universitymodel.model.Lesson;
 import engineer.leepsky.universitymodel.model.Student;
-import engineer.leepsky.universitymodel.repository.StudentRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +40,7 @@ class StudentRepositoryTest {
         this.entityManager.persist(testLesson2);
         this.entityManager.persist(testLesson3);
 
-        assertEquals(List.of(testLesson, testLesson2), studentRepository.getStudentLessons(111777));
+        assertEquals(List.of(testLesson, testLesson2), studentRepository.readLessons(111777));
     }
 
     @Test
@@ -60,7 +59,7 @@ class StudentRepositoryTest {
         this.entityManager.persist(testLesson2);
         this.entityManager.persist(testLesson3);
 
-        assertEquals(List.of(testLesson), studentRepository.getStudentLessonsByDate(111777,
+        assertEquals(List.of(testLesson), studentRepository.readLessonsOnDate(111777,
                 Date.valueOf("2022-09-09")));
     }
 

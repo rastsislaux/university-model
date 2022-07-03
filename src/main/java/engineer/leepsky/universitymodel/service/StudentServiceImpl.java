@@ -60,12 +60,12 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public List<Lesson> readLessons(Integer id) {
-        return studentRepository.getStudentLessons(id);
+        return studentRepository.readLessons(id);
     }
 
     @Override
     public List<Lesson> readLessonsOnDate(Integer id, Date date) {
-        return studentRepository.getStudentLessonsByDate(id, date);
+        return studentRepository.readLessonsOnDate(id, date);
     }
 
 

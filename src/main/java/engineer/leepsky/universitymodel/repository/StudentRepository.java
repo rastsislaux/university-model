@@ -11,9 +11,9 @@ import java.util.List;
 public interface StudentRepository extends JpaRepository<Student, Integer> {
 
     @Query(value = "SELECT l FROM Student s JOIN Lesson l ON l.groupId = s.groupId WHERE s.id = ?1")
-    List<Lesson> getStudentLessons(int studentId);
+    List<Lesson> readLessons(int studentId);
 
     @Query(value = "SELECT l FROM Student s JOIN Lesson l ON l.groupId = s.groupId WHERE s.id = ?1 AND l.date = ?2")
-    List<Lesson> getStudentLessonsByDate(int studentId, Date date);
+    List<Lesson> readLessonsOnDate(int studentId, Date date);
 
 }

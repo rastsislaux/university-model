@@ -48,7 +48,7 @@ public interface GroupService {
      * @param id - ID of a group
      * @return - list of lessons on the given date
      */
-    List<Lesson> getLessons(Integer id);
+    List<Lesson> readLessons(Integer id);
 
     /**
      * Returns a list of lessons on a given date
@@ -56,6 +56,6 @@ public interface GroupService {
      * @param date - date
      * @return - list of lessons on the given date
      */
-    List<Lesson> getLessonsOnDate(Integer id, Date date);
+    List<Lesson> readLessonsOnDate(Integer id, Date date);
 
 }

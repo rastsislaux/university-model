@@ -11,9 +11,9 @@ import java.util.List;
 public interface GroupRepository extends JpaRepository<Group, Integer> {
 
     @Query(value = "SELECT l FROM Group g JOIN Lesson l ON l.groupId = g.id WHERE g.id = ?1")
-    List<Lesson> getGroupLessons(Integer id);
+    List<Lesson> readLessons(Integer id);
 
     @Query(value = "SELECT l FROM Group g JOIN Lesson l ON l.groupId = g.id WHERE g.id = ?1 AND l.date = ?2")
-    List<Lesson> getGroupLessonsByDate(Integer id, Date date);
+    List<Lesson> readLessonsOnDate(Integer id, Date date);
 
 }

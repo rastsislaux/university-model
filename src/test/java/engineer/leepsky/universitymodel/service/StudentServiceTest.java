@@ -4,7 +4,6 @@ package engineer.leepsky.universitymodel.service;
 import engineer.leepsky.universitymodel.model.Lesson;
 import engineer.leepsky.universitymodel.model.Student;
 import engineer.leepsky.universitymodel.repository.StudentRepository;
-import engineer.leepsky.universitymodel.service.StudentServiceImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -121,7 +120,7 @@ class StudentServiceTest {
                 new Lesson(3, 3, 3, "test room3", 1919,
                         Date.valueOf("2022-09-09")));
 
-        when(studentRepository.getStudentLessons(anyInt())).thenReturn(lessons);
+        when(studentRepository.readLessons(anyInt())).thenReturn(lessons);
 
         assertEquals(lessons, studentService.readLessons(1));
     }
@@ -135,7 +134,7 @@ class StudentServiceTest {
                 new Lesson(3, 3, 3, "test room3", 1919,
                         Date.valueOf("2022-09-09")));
 
-        when(studentRepository.getStudentLessonsByDate(anyInt(), any())).thenReturn(lessons);
+        when(studentRepository.readLessonsOnDate(anyInt(), any())).thenReturn(lessons);
 
         assertEquals(lessons, studentService.readLessonsOnDate(1, Date.valueOf("2022-09-09")));
     }

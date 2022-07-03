@@ -119,9 +119,9 @@ class GroupServiceTest {
             new Lesson(3, 3, 3, "test room3", 1919,
                     Date.valueOf("2022-09-09")));
 
-        when(groupRepository.getGroupLessons(anyInt())).thenReturn(lessons);
+        when(groupRepository.readLessons(anyInt())).thenReturn(lessons);
 
-        assertEquals(lessons, groupService.getLessons(1919));
+        assertEquals(lessons, groupService.readLessons(1919));
     }
 
     @Test
@@ -133,9 +133,9 @@ class GroupServiceTest {
                 new Lesson(3, 3, 3, "test room3", 1919,
                         Date.valueOf("2022-09-09")));
 
-        when(groupRepository.getGroupLessonsByDate(anyInt(), any())).thenReturn(lessons);
+        when(groupRepository.readLessonsOnDate(anyInt(), any())).thenReturn(lessons);
 
-        assertEquals(lessons, groupService.getLessonsOnDate(1919, Date.valueOf("2022-09-09")));
+        assertEquals(lessons, groupService.readLessonsOnDate(1919, Date.valueOf("2022-09-09")));
     }
 
 }

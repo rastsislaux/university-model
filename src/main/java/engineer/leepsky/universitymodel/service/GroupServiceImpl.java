@@ -58,12 +58,12 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
-    public List<Lesson> getLessons(Integer id) {
-        return groupRepository.getGroupLessons(id);
+    public List<Lesson> readLessons(Integer id) {
+        return groupRepository.readLessons(id);
     }
 
     @Override
-    public List<Lesson> getLessonsOnDate(Integer id, Date date) {
-        return groupRepository.getGroupLessonsByDate(id, date);
+    public List<Lesson> readLessonsOnDate(Integer id, Date date) {
+        return groupRepository.readLessonsOnDate(id, date);
     }
 }

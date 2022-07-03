@@ -46,7 +46,7 @@ class GroupControllerTest {
                 new Lesson(3, 3, 3, "test room3", 1919,
                         Date.valueOf("2022-09-09")));
 
-        when (groupService.getLessons(any())).thenReturn(lessons);
+        when (groupService.readLessons(any())).thenReturn(lessons);
 
         mockMvc.perform(get("/groups/1919/schedule"))
                 .andExpect(status().isOk())
@@ -64,7 +64,7 @@ class GroupControllerTest {
                 new Lesson(3, 3, 3, "test room3", 1919,
                         Date.valueOf("2022-09-09")));
 
-        when (groupService.getLessonsOnDate(any(), any())).thenReturn(lessons);
+        when (groupService.readLessonsOnDate(any(), any())).thenReturn(lessons);
 
         mockMvc.perform(get("/groups/1919/schedule/2022-09-09"))
                 .andExpect(status().isOk())

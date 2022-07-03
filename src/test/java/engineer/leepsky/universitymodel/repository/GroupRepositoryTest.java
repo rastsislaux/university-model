@@ -39,7 +39,7 @@ class GroupRepositoryTest {
         this.entityManager.persist(testLesson2);
         this.entityManager.persist(testLesson3);
 
-        assertEquals(List.of(testLesson, testLesson2), groupRepository.getGroupLessons(1919));
+        assertEquals(List.of(testLesson, testLesson2), groupRepository.readLessons(1919));
     }
 
     @Test
@@ -58,7 +58,7 @@ class GroupRepositoryTest {
         this.entityManager.persist(testLesson2);
         this.entityManager.persist(testLesson3);
 
-        assertEquals(List.of(testLesson), groupRepository.getGroupLessonsByDate(1919, Date.valueOf("2022-09-09")));
+        assertEquals(List.of(testLesson), groupRepository.readLessonsOnDate(1919, Date.valueOf("2022-09-09")));
     }
 
 }
